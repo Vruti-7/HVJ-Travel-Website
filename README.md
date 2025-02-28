@@ -17,11 +17,30 @@
 
 ## 🚀 Setup Instructions  
 
-### 🔹 Install Dependencies  
+### 🔹 1. Install Dependencies  
 Ensure you have **Python 3.11+** installed. Then, install Flask using:  
 ```bash
-- Install dependencies: pip install flask
-- Run the app: python app.py
-- Open the browser and navigate to http://127.0.0.1:5000/
+  - pip install flask
+🔹 2. Run the Application
+  - python app.py
+🔹 3. Open in Browser
+  - http://127.0.0.1:5000/
 
-📌 **Note:** This project was collaboratively developed as a **team effort**, focusing on design, development, content writing, testing, and project management.
+📌  Project Structure
+flask-app/
+│── app.py                  # Main Flask application  
+│── users_and_favorites.csv  # User & favorites data storage  
+│── users.txt                # User information storage  
+│── static/                  # CSS & Images  
+│   ├── style.css  
+│   ├── logo.png  
+│   ├── user_images/         # Profile pictures  
+│   ├── city_images/         # Images for each city  
+│── templates/               # HTML templates  
+│   ├── welcome.html  
+│   ├── login.html  
+│   ├── register.html  
+│   ├── city pages (dubai.html, istanbul.html, etc.)
+
+📌 Note
+This project was collaboratively developed as a team effort, focusing on design, development, content writing, testing, and project management.
