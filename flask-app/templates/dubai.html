@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Dubai, UAE</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Your custom styles -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        /* Additional CSS for fixed image height */
+        #imageSlider .carousel-inner img {
+            height: 400px; /* Adjust the height as needed */
+            object-fit: cover;
+        }
+        p {
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+<header class="bg-primary text-white text-center py-4">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <div class="container">
+            <a class="navbar-brand text-white" href="/">Welcome to Dubai, UAE</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <a class="btn btn-primary btn-sm" href="/welcome">Home</a>
+                    <!-- Add a separate <li> for the "Add to Favorites" button -->
+                    <li class="nav-item">
+<form id="addToFavoritesForm">
+    <input type="hidden" name="city_name" value="dubai">  <!-- Add this line -->
+    <button type="submit" class="btn btn-primary btn-sm" id="addToFavorites">Add to Favorites</button>
+    <div class="message" id="successMessage"></div>
+</form>
+                    </li>
+					<a class="btn btn-primary btn-sm" href="/profile">Profile</a>
+                    {% if 'username' in session %}
+                        <a class="btn btn-primary btn-sm" href="/logout">Logout</a>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container mt-4">
+    <!-- Image Slider -->
+    <div id="imageSlider" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/static/dubai1.jpg" alt="Dubai 1" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+                <img src="/static/dubai2.jpg" alt="Dubai 2" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+                <img src="/static/dubai3.jpg" alt="Dubai 3" class="d-block w-100">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#imageSlider" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#imageSlider" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!-- Information Section -->
+    <div class="mt-4">
+        <h2 class="text-primary">Explore the Beauty of Dubai, UAE</h2>
+        <p class="lead">Dubai is a city of architectural wonders, luxury shopping, and a vibrant culture. Located in the United Arab Emirates (UAE), Dubai is known for its iconic skyscrapers, desert landscapes, and a mix of modern and traditional experiences.</p>
+
+        <p class="lead">Visitors to Dubai can explore the stunning Burj Khalifa, the world's tallest building, and take in panoramic views from its observation deck. The city is also famous for its artificial islands, including the Palm Jumeirah and The World, offering unique resort experiences.</p>
+
+        <p class="lead">Discover Dubai's rich culture by visiting the historic Al Fahidi neighborhood, home to art galleries, museums, and traditional wind-tower architecture. Don't miss the vibrant spice and gold souks for a taste of traditional market shopping.</p>
+
+        <p class="lead">Dubai offers a blend of luxury dining, thrilling desert adventures, and world-class entertainment, making it a must-visit destination for travelers seeking both opulence and adventure.</p>
+    </div>
+
+    <!-- What to See and Do in Dubai -->
+    <div class="mt-4">
+        <!-- Update the section with information about Dubai attractions -->
+        <!-- ... (content for Dubai attractions) ... -->
+    </div>
+
+    <!-- Agent Contact Information -->
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
+            Contact Our Agent
+        </div>
+        <div class="card-body">
+            <p>Name: John Doe</p>
+            <p>Email: john@example.com</p>
+            <p>Phone: +1 (123) 456-7890</p>
+        </div>
+    </div>
+</div>
+
+<!-- Link to Bootstrap and jQuery scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("#addToFavoritesForm");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+
+            fetch("/add_to_favorites", {
+                method: "POST",
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        // Display an alert box for the error message
+                        alert(data.message);
+                    } else {
+                        // Use an alert box for success messages
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        });
+    });
+</script>
+
+</body>
+</html>

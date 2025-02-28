@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form | Your Website</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Your custom styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-3">
+<div class="col-md-2 logo-container header-logo">
+    <img src="{{ url_for('static', filename='logo.png') }}" alt="HVJ Travel Agency Logo" width="90">
+	
+</div>
+    </header>
+
+    <div class="container mt-4">
+        <div class="wrapper">
+            <form action="{{ url_for('login') }}" method="POST" id="loginForm">
+                <div class="form-group">
+                    <label for="username">username</label>
+                    <input type="text" id="username" name="username" class="form-control" placeholder="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Login" class="btn btn-primary btn-block">
+                </div>
+                <div class="text-center">
+                    Not a member? <a href="{{ url_for('register') }}">Signup now</a>
+                </div>
+            </form>
+            <div id="errorMessage" class="text-danger"></div>
+        </div>
+    </div>
+    
+    <!-- Link to Bootstrap and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginForm = document.querySelector("#loginForm");
+            const passwordField = document.querySelector("#password");
+            const errorMessage = document.querySelector("#errorMessage");
+
+            loginForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                const formData = new FormData(loginForm);
+                const username = formData.get("username");
+                const password = formData.get("password");
+
+                // Send an AJAX request to your Flask server for password validation
+                fetch("/validate_password", {
+                    method: "POST",
+                    body: JSON.stringify({ username: username, password: password }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.valid) {
+                        // Password is correct, allow the form to submit
+                        loginForm.submit();
+                    } else {
+                        // Clear the password field
+                        passwordField.value = "";
+                        // Show an error message
+                        errorMessage.textContent = "Wrong username or password";
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Your custom styles -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1>Welcome to Our Website</h1>
+                </div>
+                <div class="col text-right">
+                    {% if 'username' in session %}
+						<a class="btn btn-info" href="/profile">Profile</a>
+                        <a class="btn btn-warning" href="/favorites">Favorites</a> <!-- Add Favorites button -->
+                        <a class="btn btn-danger" href="/logout">Logout</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mt-4">
+        <div class="form-group">
+            <label for="cityDropdown">Select a City:</label>
+            <select id="cityDropdown" class="form-control">
+                <option value="">Select a City</option>
+                <option value="istanbul">Istanbul</option>
+                <option value="rotorua">Rotorua</option>
+                <option value="queenstown">Queenstown</option>
+                <option value="dubai">Dubai</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Link to Bootstrap and jQuery scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Function to handle the city selection
+        document.getElementById("cityDropdown").addEventListener("change", function() {
+            var selectedCity = this.value;
+            if (selectedCity) {
+                // Redirect to the respective city's page
+                window.location.href = selectedCity; // Add ".html" to the selected city
+            }
+        });
+    </script>
+</body>
+</html>

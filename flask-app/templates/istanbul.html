@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Istanbul</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- Your custom styles -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        /* Additional CSS for fixed image height */
+        #imageSlider .carousel-inner img {
+            height: 400px; /* Adjust the height as needed */
+            object-fit: cover;
+        }
+        p {
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+<header class="bg-primary text-white text-center py-4">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <div class="container">
+            <a class="navbar-brand text-white" href="/">Welcome to Istanbul</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <a class="btn btn-primary btn-sm" href="/welcome">Home</a>
+                    <!-- Add a separate <li> for the "Add to Favorites" button -->
+                    <li class="nav-item">
+<form id="addToFavoritesForm">
+    <input type="hidden" name="city_name" value="istanbul">  <!-- Add this line -->
+    <button type="submit" class="btn btn-primary btn-sm" id="addToFavorites">Add to Favorites</button>
+    <div class="message" id="successMessage"></div>
+</form>
+                    </li>
+					                    <a class="btn btn-primary btn-sm" href="/profile">Profile</a>
+                    {% if 'username' in session %}
+                        <a class="btn btn-primary btn-sm" href="/logout">Logout</a>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container mt-4">
+    <!-- Image Slider -->
+    <div id="imageSlider" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/static/istanbul1.jpg" alt="Istanbul 1" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+                <img src="/static/istanbul2.jpg" alt="Istanbul 2" class="d-block w-100">
+            </div>
+            <div class="carousel-item">
+                <img src="/static/istanbul3.jpg" alt="Istanbul 3" class="d-block w-100">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#imageSlider" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#imageSlider" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <!-- Information Section -->
+    <div class="mt-4">
+        <h2 class="text-primary">Explore the Beauty of Istanbul</h2>
+        <p class="lead">Istanbul is one of the coolest European and Asian cities. It is the only city in the world located in two continents, touching both Europe and Asia. Yet in parts it also has the look of a North African or Middle Eastern city, giving it the distinction of not being defined by any particular continent or region.</p>
+
+        <p class="lead">While standing at the crossroads of East and West, the city's breathtakingly beautiful landmarks also merge cultures and religions. The famous Hagia Sophia has been a church and a mosque, while remnants of the city's former incarnations as Byzantium and Constantinople are everywhere in this sprawling city.</p>
+
+        <p class="lead">While history may ooze from every street, Istanbul is a 21st-century city mixing exciting contemporary attractions with timeless monuments. It's also a modern metropolis with trendy cafés and clubs, which is a fascinating surprise to every visitor.</p>
+
+        <p class="lead">Spend a morning browsing the Grand Bazaar and your afternoon in the Blue Mosque, followed by a visit to the Istanbul Modern Art Museum. Then take the opportunity to dine in Asia and party back in Europe until dawn, with the Bosphorus providing picture-postcard views along the way.</p>
+    </div>
+
+    <!-- What to See and Do in Istanbul -->
+    <div class="mt-4">
+        <h3 class="text-primary mt-4">What to See and Do in Istanbul</h3>
+        <p class="lead">Decide what you really want to see in Istanbul based on your interests -- whether that's art, architecture, street life or simply snapping a few photos by the main landmarks. We highlight the best attractions in different categories and, to help you plan, link you to their location on Google Maps or to their official website or tour options.</p>
+
+        <h4 class="text-primary">THE LANDMARKS, ICONS, AND INSTAGRAM SPOTS</h4>
+        <p class="lead">Hagia Sophia was the greatest church in Christendom until the 15th century, when it became a mosque. In 1935 it was turned into a museum and stands today as one of the world's greatest buildings. Another one is the Blue Mosque, only a few steps away. It was first built in the 17th century as the world's grandest mosque, and its popular name comes from the blue tiles adorning the walls of the interior.</p>
+
+        <p class="lead">Another Istanbul landmark is the Galata Tower, previously known as the Tower of Christ. It was built by the city's Genoese community and offers a viewing platform at the top.</p>
+
+        <p class="lead">Also don't miss Dolmabahçe Sarayi, the palace that the sultans moved into in 1856. It's a marvellous baroque construction with an opulent interior, which includes the world's largest chandelier and almost 300 rooms and six hamams.</p>
+
+        <h4 class="text-primary">MODERN AND CONTEMPORARY ART</h4>
+        <p class="lead">The Istanbul Modern was Turkey's first national contemporary art museum. It opened in 2004 in a former warehouse, and promotes Turkish art in its permanent collection together with temporary exhibitions by international artists. It's also home to a popular café and offers city views from its second floor.</p>
+
+        <h4 class="text-primary">STRIKING ARCHITECTURE AND MAJOR MONUMENTS</h4>
+        <p class="lead">Bosphorus Bridge seen from the baroque Ortakoy Camii Mosque is arguably Istanbul's best picture-postcard image. The suspension bridge links Europe with Asia and was opened in 1973.</p>
+
+        <h4 class="text-primary">ANCIENT SITE</h4>
+        <p class="lead">The Yerebatan Sarayi (Basilica Cistern) is an underground cistern that's one of the city's most impressive sights. It dates from the 6th century and has over 300 marble columns, two of which with blocks carved into Medusa heads.</p>
+
+        <h4 class="text-primary">CITY LIFE AND MAIN STREETS</h4>
+        <p class="lead">Every visitor to Istanbul passes by the Grand Bazaar. Located in the historic heart of the city, it has over 4000 vendors, and it's a very atmospheric experience even if you don't plan to fall into the tourist traps and buy something. From there, do some more shopping down the pedestrian Istiklal Street. It's the city's liveliest, home to many international shops and welcoming cafés.</p>
+
+        <h4 class="text-primary">SHOPPING</h4>
+        <p class="lead">The great bazaars and souks from ancient times are now replaced by state-of-the-art malls such as Kanyon with almost 200 shops of international and Turkish brands. But of course the Grand Bazaar is still there, although it's more of a tourist's sightseeing experience than an actual shopping destination. Look for a souvenir around its covered alleys, browsing through carpets, spices, fabrics, or jewelry, while for products you're more familiar with, head to the Nisantasi district. Its Abdi Ipekci Street is where the city's well-heeled population goes for their luxury brands.</p>
+
+        <p class="lead">Where both tourists and locals shop together is on Istiklal Caddesi, a pedestrian street known for its shops and cafés. It's a cosmopolitan street that should not be missed by anyone visiting the city, going from Taksim Square to the iconic Galata Tower.</p>
+
+        <h4 class="text-primary">EATING AND DRINKING</h4>
+        <p class="lead">Nowhere else in the world can you dine with more views. Overlook the Bosphorus at a number of restaurants in Europe or Asia without ever leaving the same city, and enjoy contemporary Turkish dishes or international fusion menus. A good number of cafés and restaurants are found in the pedestrianized Istiklal Caddesi.</p>
+    </div>
+
+    <!-- Agent Contact Information -->
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
+            Contact Our Agent
+        </div>
+        <div class="card-body">
+            <p>Name: John Doe</p>
+            <p>Email: john@example.com</p>
+            <p>Phone: +1 (123) 456-7890</p>
+        </div>
+    </div>
+</div>
+
+<!-- Link to Bootstrap and jQuery scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("#addToFavoritesForm");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+
+            fetch("/add_to_favorites", {
+                method: "POST",
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        // Display an alert box for the error message
+                        alert(data.message);
+                    } else {
+                        // Use an alert box for success messages
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                });
+        });
+    });
+</script>
+
+
+</body>
+</html>
